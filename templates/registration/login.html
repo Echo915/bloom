@@ -1,0 +1,73 @@
+{% extends "registration/base.html" %}
+<!-- <html style="height: auto;"> -->
+
+{% block title %} Bloom | Login {% endblock title %}
+
+{% block body %}
+<div class="login-box position-absolute" style="width: 40%; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="container mb-4">
+        <h2 class="text-center">Bloom | Login</h2>
+    </div>
+    <div class="card card-outline card-primary">
+        <div class="card-body rounded-4 shadow" style="border-top: 3px solid #0069D9;">
+            <p class="login-box-msg">Sign in to start your session</p>
+
+            <form id="login-frm" action="" method="post">{% csrf_token %}
+                <div class="err-msg-container">
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li class="err-msg text-danger">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="input-group mb-3">
+                    {{ form.username }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="bi bi-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    {{ form.password }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="bi bi-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">
+                                Remember Me
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </div>
+            </form>
+            <p class="mb-1">
+                <a href="#">I forgot my password</a>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    // Adds attributes to django pre-built username and password input tags
+    const username = $("#id_username");
+    const password = $("#id_password");
+
+    // Username attributes
+    username.addClass("form-control");
+    username.attr("placeholder", "Username");
+
+    // Password attributes
+    password.addClass("form-control");
+    password.attr("placeholder", "Password");
+</script>
+{% endblock body %}

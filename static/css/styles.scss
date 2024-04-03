@@ -1,0 +1,31 @@
+.centeredY {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.centeredX {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.centered {
+    @extend .centeredX, .centeredY
+}
+
+// .centered {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+// } 
+
+.outlined {
+    border: 1px solid #EDEDED;
+}
+
+.img-icon {
+    width: 2rem;
+    aspect-ratio: 1;
+}

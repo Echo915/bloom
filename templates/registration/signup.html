@@ -1,0 +1,32 @@
+{% extends "registration/base.html" %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block body %}
+<div class="centered bg-light rounded shadow" style="width: 80%;">
+    <div class="row centered bg-white rounded shadow" style="width: 70%;">
+        <div class="col-lg-7 col-md-7 p-5">
+            <form method="post">{% csrf_token %}
+                <h1>Bloom</h1>
+                <hr>
+                <p class="h4">Register Now</p>
+                <p>You may Register with Google</p>
+                <a href="#" class="btn btn-outline-secondary btn-lg btn-block mb-3"><span class="h3"><img class="img-icon" src="{% static 'images/google-ico.png' %}" alt="G"></span> Register with Google</a>
+                <p>or Register with email</p>
+                <label class="h6" for="email">Email</label>
+                {{ form.email }}
+                <label class="h6" for="username">Username</label>
+                {{ form.username }}
+                <label class="h6" for="password">Password</label>
+                {{ form.password }}
+                <button type="submit" class="btn btn-primary form-control mt-3">Create Account</button>
+                <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+            </form>
+        </div>
+        <div class="col-lg-5 col-md-5 position-relative">
+            <img src="{% static 'images/book-ladder-gl.jpg' %}" alt="img" class="w-100">
+        </div>
+    </div>
+</div>
+{% endblock body %}
