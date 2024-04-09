@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head  -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <!-- ----------------------------------------- Plugins ----------------------------------------------- -->
+    <!-- Main Css  -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Tailwind Css  -->
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <!-- Jquery -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Main Js  -->
+    <script src="{% static 'javascript/script.js' %}"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-icons/bootstrap-icons.min.css' %}">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="{% static 'plugins/sweetalert2/sweetalert2.min.css' %}">
+    <script src="{% static 'plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+</head>
+<!-- Body  -->
+<body class="bg-gray-100 h-full w-full absolute grid grid-cols-15">
+    <aside class="flexbox h-full col-start-1 col-span-2 relative"> 
+        <div class="sidevar w-full h-full bg-white p-4">
+            <div class="app-name">
+                <h1 class="text-blue-900">BLOOM</h1>  
+            </div>
+            <div class="navigation pt-5">
+                <ul class="flexbox space-y-1 p4 fixed">
+                    <li class="text-blue-500 bg-blue-50 hover:bg-blue-50 pl-3 pr-5 py-2 rounded-md">
+                        <i class="bi bi-house-fill"></i> <a href="#">Dashboard</a>
+                    </li>
+                    <li class="text-gray-400 hover:bg-blue-50 pl-3 pr-5 py-2 rounded-md">
+                        <i class="bi bi-document"> </i><a href="{% url 'sections' %}">Notes</a>
+                    </li>
+                    <li class="text-gray-400 hover:bg-blue-50 pl-3 pr-5 py-2 rounded-md">
+                        <a href="#">Take Tests</a>
+                    </li>
+                    <li class="text-gray-400 hover:bg-blue-50 pl-3 pr-5 py-2 rounded-md">
+                        <i class="bi bi-gear-fill"> </i><a href="#">Settings</a>
+                    </li>
+                </ul>
+                <div class="flex items-center p-4" ></div>
+            </div>
+        </div>
+    </aside>
+    <main class="flexbox col-start-3 col-span-11 px-1 h-full relative">
+        <div class="content bg-white h-full px-3 py-5">
+            <header><h1 class="text-red-800">Header is Here</h1></header>
+            <hr>
+            <section class="py-5">
+                {% block body %}
+                {% endblock body %}
+            </section>
+        </div>
+    </main> 
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<h1>Add a new note</h1>
+<form method="post">{% csrf_token %}
+    <input type="file" name="file" id="file">
+    <button class="border" type="submit">Add</button>
+</form>
+{% endblock body %}

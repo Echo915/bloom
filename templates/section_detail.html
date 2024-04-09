@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+{% if section.associated_notes.all.count > 0 %}
+    {% for note in section.associated_notes.all %}
+        <a href="{{ note.file.url }}" target="_blank" class="block"><i class="bi bi-file-pdf-fill text-red-500"></i> {{ note.title }}</a>
+    {% endfor %}
+{% else %}
+    <center><p>This section is empty</p></center>
+{% endif %}
+<h1>Add a new note</h1>
+<form id="note-form" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <input type="hidden" name="section_id" value="{{ section.id }}">
+    <input type="file" name="file" id="file">
+    <button class="border" type="submit">Add</button>
+</form>
+<script>
+    $("#note-form").submit(
+        function(e){
+            e.preventDefault();
+            var file = document.getElementById("file").files[0];
+            var formData = new FormData(this);
+
+            $.ajax({
+                method: "POST",
+                contentType: false,
+                processData: false,
+                cache: false, // Prevents browser from caching data posted by the ajax request
+                type: "POST", // Method of sending information to url. default is GET
+                dataType: "json", // expected type of response from url
+                url: "{% url 'note_add' %}",
+                data: formData,
+                success: function(response) {
+                    console.log("server response: ", response);
+                    Swal.fire("Success", "Your data has been recorded successfully", "success");
+                    // location.href = "sec"
+                },
+                error: function(error) {
+                    console.error("Error: ", error);
+                    Swal.fire("Error!", "An error Occured", "error");
+                }
+            });
+        }
+    );
+</script>
+{% endblock body %}

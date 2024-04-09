@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Plugins
+    # "tailwindcss",
+
     # Bloom apps
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
+    "source_note.apps.SourceNoteConfig",
 ]
 
 MIDDLEWARE = [
@@ -120,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [BASE_DIR/"static"]
 
 # Default primary key field type
@@ -130,5 +136,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom User Model
 AUTH_USER_MODEL = "accounts.CustomUser"
 
+# Log in and log out redirect url
 LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "login"
+
+# Tailwindcss Configurations
+TAILWINDCSS_CLI_FILE = BASE_DIR / "tailwindcss-windows-x64"
+TAILWINDCSS_CONFIG_FILE = BASE_DIR / "tailwind.config.js"
+TAILWINDCSS_OUTPUT_FILE = "css/output.css" 
+
+# Media
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

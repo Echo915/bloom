@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+<!-- <h1>Hello bloody new world</h1>
+<div class="w-full bg-green-100">
+    <h1 class="text-green-800">Hello once again</h1>
+</div> -->
+<div>
+    <button type="button"><i class="bi bi-add bg-blue-400 px-3 py-4 rounded-md" onclick="addSection()"> Add Section</i></button>
+    {% if section_list %}
+        {% for section in section_list %}
+            <div>
+                <a href="{% url 'section_detail' section.pk %}"><span><i class="bi bi-folder-fill text-gray-400"></i></span> <span><small>{{ section.title }}</small></span></a>
+                
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="pb-4 text-red-500">No sections yet.</p>
+    {% endif %}
+</div>
+<div id="section-frm" class="px-3 py-5 none" style="display: none;">
+    <form id="section-form" method="post">{% csrf_token %}
+        <div class="pb-4">
+            <label for="title" class="font-bold">Section Name: </label>
+            <input class="border-none p-3 bg-gray-100 rounded-md" type="text" name="title" id="title" placeholder="Untitled section" style="padding: 5px 10px; border: 1px solid gray;">
+        </div>
+        <div class="pb-4">
+            <label for="description" class="font-bold">Description: </label>
+            <input class="border-none bg-gray-100 rounded-md" name="description" id="description" style="padding: 5px 10px; border: 1px solid gray;"></input>
+        </div>
+        <br>
+        <button type="submit" class="rounded-md px-3 py-2 text-white bg-blue-400">Create</button>
+        <script>
+            $("#section-form").submit(
+                function(e){
+                    e.preventDefault();
+                    // const title = $(this).find("#title").val();
+                    // const description = $(this).find("#description").val();
+                    $.ajax({
+                        method: "POST",
+                        contentType: false,
+                        processData: false,
+                        cache: false, // Prevents browser from caching data posted by the ajax request
+                        type: "POST", // Method of sending information to url. default is GET
+                        dataType: "json", // expected type of response from url
+                        url: "{% url 'section_data' %}",
+                        data: new FormData($(this)[0]),
+                        success: function(response) {
+                            console.log("server response: ", response);
+                            Swal.fire("Success", "Your data has been recorded successfully", "success");
+                        },
+                        error: function(error) {
+                            console.error("Error: ", error);
+                            Swal.fire("Error!", "An error Occured", "error");
+                        }
+                    });
+                }
+            );
+        </script> 
+    </form>
+</div>
+<script>
+    function addSection() {
+        Swal.fire({
+            imageUrl: "{% static 'plugins/bootstrap-icons/folder-fill.svg' %}",
+            imageWidth: 200,
+            imageHeight: 100,
+            imageAlt: "image",
+            title: "New Section",
+            html: document.getElementById("section-form"),
+            showConfirmButton: false,
+            showCancelButton: false,
+            cancelButtonColor: "#d33", 
+        });
+    }
+</script>
+{% endblock body %}  

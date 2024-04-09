@@ -1,0 +1,13 @@
+build css: npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css
+
+class SectionDetailView(DetailView):
+    model = Note
+    template_name = "section_detail.html"
+
+    # def get_context_data(self, **kwargs):
+    #     new_note = NoteView()
+    #     note_context = new_note.get_context_data()
+    #     section_context = super().get_context_data(**kwargs)
+    #     section_context.update(note_context)
+
+        # return section_context

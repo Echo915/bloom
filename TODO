@@ -5,3 +5,29 @@ Creating our custom user model requires four steps:
 • create new forms for UserCreationForm and UserChangeForm
 • update accounts/admin.py
 
+<!-- {% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+<div>
+    {% if section_list %}
+        {% for section in section_list %}
+            <div>
+                <i class="bi bi-folder-fill text-gray-400 shadow block"></i>
+                <p class="block">{{ section }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+<h1>Add a new section</h1>
+<div class="bg-gray-100 px-3 py-5 rounded-md">
+    <form method="post">{% csrf_token %}
+        <label for="title">Section Name</label>
+        {{ form.title }}
+        <label for="description" class="mt-6 font-bold">Description</label>
+        {{ form.description }}
+        <br><br><br>
+        <center><button type="submit" class="rounded-sm text-white bg-blue-400 shadow">Add</button></center>
+    </form>
+</div>
+{% endblock body %}      -->

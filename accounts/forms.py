@@ -1,4 +1,4 @@
-from django.forms import PasswordInput, TextInput, EmailInput
+from django.forms import PasswordInput, TextInput, EmailInput, CharField
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
 
@@ -6,11 +6,15 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
         # fields = UserCreationForm.Meta.fields + ("rank",)
-        fields = ["username", "email", "rank", "password"]
+        fields = UserCreationForm.Meta.fields + (("email"),)
         widgets = {
-            "password": PasswordInput(attrs={
+            "password1": PasswordInput(attrs={
                 "class": "form-control",
                 "placeholder": "Enter Password",
+            }),
+            "password2": PasswordInput(attrs={
+                "class": "form-control",
+                "placeholder": "Enter the same password as before",
             }),
             "email": EmailInput(attrs={
                 "required": "true",
@@ -27,12 +31,12 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm):
         model = CustomUser
         # fields = UserChangeForm.Meta.fields
-        fields = ["username", "email", "rank", "password"]
+        fields = ["username", "email",]
         widgets = {
-            "password": PasswordInput(attrs={
-                "class": "form-control",
-                "placeholder": "Enter Password",
-            }),
+            # "password": PasswordInput(attrs={
+            #     "class": "form-control",
+            #     "placeholder": "Enter Password",
+            # }),
             "email": EmailInput(attrs={
                 "class": "form-control",
                 "placeholder": "example@example.com"
